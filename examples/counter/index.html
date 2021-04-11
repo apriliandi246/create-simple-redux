@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <style>
+         .container {
+            display: flex;
+            margin-top: 40px;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+         }
+
+         h1 {
+            font-size: 3rem;
+         }
+
+         .buttons {
+            gap: 25px;
+            display: flex;
+         }
+
+         button {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+         }
+      </style>
+      <title>counter</title>
+   </head>
+   <body>
+      <div class="container">
+         <h1 id="value"></h1>
+
+         <div class="buttons">
+            <button id="increment">+</button>
+            <button id="decrement">-</button>
+         </div>
+      </div>
+
+      <script src="./store.js"></script>
+      <script src="./reducer.js"></script>
+      <script>
+         // create store
+         const store = createStore(reducer);
+
+         // subcribe to the store
+         store.subscribe(render);
+
+         function render() {
+            document.getElementById(
+               "value"
+            ).textContent = store.getState().toString();
+         }
+
+         render();
+
+         document
+            .getElementById("increment")
+            .addEventListener("click", function increment() {
+               store.dispath({
+                  type: "INCREMENT",
+                  defaultValue: 2,
+               });
+            });
+
+         document
+            .getElementById("decrement")
+            .addEventListener("click", function decrement() {
+               store.dispath({
+                  type: "DECREMENT",
+                  defaultValue: 1,
+               });
+            });
+      </script>
+   </body>
+</html>
