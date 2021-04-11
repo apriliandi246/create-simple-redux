@@ -1,3 +1,5 @@
+// https://github.com/reduxjs/redux/blob/master/src/utils/isPlainObject.ts
+
 export default function isPlainObject(obj) {
    if (typeof obj !== "object" || obj === null) return false;
 
